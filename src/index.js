@@ -13,56 +13,37 @@ let lastHole = 0;
 let points = 0;
 let difficulty = "hard";
 
-/**
- * Generates a random integer within a range.
- *
- * The function takes two values as parameters that limits the range 
- * of the number to be generated. For example, calling randomInteger(0,10)
- * will return a random integer between 0 and 10. Calling randomInteger(10,200)
- * will return a random integer between 10 and 200.
- *
- */
+
 function randomInteger(min, max) {
-  // return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-/**
- * Sets the time delay given a difficulty parameter.
- *
- * The function takes a `difficulty` parameter that can have three values: `easy`
- * `normal` or `hard`. If difficulty is "easy" then the function returns a time delay
- * of 1500 milliseconds (or 1.5 seconds). If the difficulty is set to "normal" it should
- * return 1000. If difficulty is set to "hard" it should return a randomInteger between
- * 600 and 1200.
- *
- * Example: 
- * setDelay("easy") //> returns 1500
- * setDelay("normal") //> returns 1000
- * setDelay("hard") //> returns 856 (returns a random number between 600 and 1200).
- *
- */
+
 function setDelay(difficulty) {
-  // TODO: Write your code here.
-  
+  if (difficulty === "easy") {
+    return 1500; // 1500 milliseconds
+  } else if (difficulty === "normal") {
+    return 1000; // 1000 milliseconds
+  } else if (difficulty === "hard") {
+    return randomInteger(600, 1200); // Random integer between 600 and 1200 milliseconds
+  } else {
+    // Handle unexpected input, maybe default to normal difficulty
+    return 1000;
+  }
 }
 
-/**
- * Chooses a random hole from a list of holes.
- *
- * This function should select a random Hole from the list of holes.
- * 1. generate a random integer from 0 to 8 and assign it to an index variable
- * 2. get a random hole with the random index (e.g. const hole = holes[index])
- * 3. if hole === lastHole then call chooseHole(holes) again.
- * 4. if hole is not the same as the lastHole then keep track of 
- * it (lastHole = hole) and return the hole
- *
- * Example: 
- * const holes = document.querySelectorAll('.hole');
- * chooseHole(holes) //> returns one of the 9 holes that you defined
- */
-function chooseHole(holes) {
-  // TODO: Write your code here.
 
+function chooseHole(holes) {
+  const maxIndex = holes.length - 1;
+  let index = randomInteger(0, maxIndex);
+
+  // Ensure we don't pick the same hole consecutively
+  while (index === lastHole) {
+    index = randomInteger(0, maxIndex);
+  }
+
+  lastHole = index;
+  return holes[index];
 }
 
 /**
@@ -86,42 +67,50 @@ function chooseHole(holes) {
 *
 */
 function gameOver() {
-  // TODO: Write your code here
-  
+  const time = getTime(); // Assume this function returns the remaining time
+
+  if (time > 0) {
+    const timeoutId = showUp(); // Continue the game with a new delay and hole
+    return timeoutId;
+  } else {
+    const gameStopped = stopGame(); // Stop the game if time is up
+    return gameStopped;
+  }
 }
 
-/**
-*
-* Calls the showAndHide() function with a specific delay and a hole.
-*
-* This function simply calls the `showAndHide` function with a specific
-* delay and hole. The function needs to call `setDelay()` and `chooseHole()`
-* to call `showAndHide(hole, delay)`.
-*
-*/
+
 function showUp() {
-  let delay = 0; // TODO: Update so that it uses setDelay()
-  const hole = 0;  // TODO: Update so that it use chooseHole()
+  const delay = setDelay(); // Assume setDelay() returns the desired delay
+  const hole = chooseHole(); // Assume chooseHole() returns the index of the hole
   return showAndHide(hole, delay);
 }
 
-/**
-*
-* The purpose of this function is to show and hide the mole given
-* a delay time and the hole where the mole is hidden. The function calls
-* `toggleVisibility` to show or hide the mole. The function should return
-* the timeoutID
-*
-*/
-function showAndHide(hole, delay){
-  // TODO: call the toggleVisibility function so that it adds the 'show' class.
+ 
+function showAndHide(hole, delay) {
+  toggleVisibility(hole); // Show the mole by adding the 'show' class
+
+  const timeoutID = setTimeout(() => {
+    toggleVisibility(hole); // Hide the mole after delay by removing the 'show' class
+    gameOver(); // Check if game should continue or stop
+  }, delay);
+
+  return timeoutID;
+}
+
   
   const timeoutID = setTimeout(() => {
     // TODO: call the toggleVisibility function so that it removes the 'show' class when the timer times out.
     
-    gameOver();
-  }, 0); // TODO: change the setTimeout delay to the one provided as a parameter
-  return timeoutID;
+function gameOver() {
+  const time = getTime(); // Assume this function returns the remaining time
+
+  if (time > 0) {
+    const timeoutId = showUp(); // Continue the game with a new delay and hole
+    return timeoutId;
+  } else {
+    const gameStopped = stopGame(); // Stop the game if time is up
+    return gameStopped;
+  }
 }
 
 /**
@@ -130,9 +119,8 @@ function showAndHide(hole, delay){
 * a given hole. It returns the hole.
 *
 */
-function toggleVisibility(hole){
-  // TODO: add hole.classList.toggle so that it adds or removes the 'show' class.
-  
+function toggleVisibility(hole) {
+  hole.classList.toggle('show');
   return hole;
 }
 
@@ -244,11 +232,12 @@ function stopGame(){
 * is clicked.
 *
 */
-function startGame(){
-  //setDuration(10);
-  //showUp();
+function startGame() {
+  setDuration(10); // Set the game duration to 10 seconds
+  showUp(); // Start showing moles
   return "game started";
 }
+
 
 startButton.addEventListener("click", startGame);
 
