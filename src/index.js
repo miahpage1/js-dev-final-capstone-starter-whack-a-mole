@@ -55,6 +55,19 @@ function startGame() {
   gameInterval = setInterval(showMole, setDelay(difficulty));
 }
 
+
+function showMole() {
+  const hole = chooseHole(holes);
+  const mole = hole.querySelector('.mole');
+
+  mole.classList.add('show');
+  setTimeout(() => {
+    mole.classList.remove('show');
+  }, 500); // Example hide delay
+}
+
+startButton.addEventListener('click', startGame);
+
 function gameOver() {
   if (time > 0) {
     return showUp();
@@ -63,7 +76,6 @@ function gameOver() {
   }
 }
 
-/**
 
 function showUp() {
   let delay = setDelay(difficulty);
