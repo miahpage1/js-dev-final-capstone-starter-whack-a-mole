@@ -8,7 +8,7 @@ html {
 h1 {
   text-align: center;
   font-size: 90px;
-  font-family: 'Creepster', cursive; 
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   color: white;
   -webkit-text-stroke: 2px black;
 }
@@ -21,12 +21,12 @@ h2 {
 }
 
 #start {
-  text-align: center;
-  font-size: 30px;
+    text-align: center;
+    font-size: 30px;
 }
 
-#timer {
-  color: white;
+#timer{
+    color: white;
 }
 
 .grid {
@@ -35,7 +35,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  cursor: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6NjtKtc-HfsVOeOKFIo0SttauJ6CfvUilCQ&s'), pointer;
+  /*cursor: url('./assets/mallet.png'), pointer;*/
 }
 
 .hole {
