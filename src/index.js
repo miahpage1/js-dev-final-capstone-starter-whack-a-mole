@@ -70,32 +70,36 @@ startButton.addEventListener('click', startGame);
 
 function gameOver() {
   if (time > 0) {
-    return showUp();
+    return showUp(); 
   } else {
-    return stopGame();
+    return stopGame(); 
   }
 }
 
 
 function showUp() {
-  let delay = setDelay(difficulty);
-  const hole = chooseHole(holes);
+  let delay = setDelay(difficulty); 
+  const hole = chooseHole(holes); 
+
   return showAndHide(hole, delay);
 }
 
 
 function showAndHide(hole, delay) {
-  toggleVisibility(hole); // Show the mole
+  toggleVisibility(hole);
+
   const timeoutID = setTimeout(() => {
-    toggleVisibility(hole); // Hide the mole after delay
+    toggleVisibility(hole); 
     gameOver();
   }, delay);
+
   return timeoutID;
 }
 
 
 function toggleVisibility(hole) {
   hole.classList.toggle('show');
+  return hole;
 }
 
 
@@ -130,29 +134,23 @@ function startTimer() {
 
 function whack(event) {
   updateScore();
-  toggleVisibility(event.target); // Hide the mole when clicked
+  toggleVisibility(event.target); 
 }
 
-/**
- * Adds the 'click' event listeners to the moles.
- */
+
 function setEventListeners() {
   moles.forEach(mole => {
     mole.addEventListener('click', whack);
   });
 }
 
-/**
- * Sets the duration of the game.
- */
+
 function setDuration(duration) {
   time = duration;
   return time;
 }
 
-/**
- * This function is called when the game is stopped.
- */
+
 function stopGame() {
   clearInterval(timer);
   return "game stopped";
@@ -160,9 +158,9 @@ function stopGame() {
 
 
 function startGame() {
-  clearScore();
-  setDuration(30); // Example duration, adjust as needed
-  startTimer();
+  clearScore(); 
+  setDuration(30); 
+  startTimer(); 
   return "game started";
 }
 
