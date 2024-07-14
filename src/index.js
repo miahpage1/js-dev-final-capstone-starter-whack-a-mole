@@ -22,24 +22,34 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   if (difficulty === "easy") {
-    return 1500;
+    return 1500; // 1500 milliseconds
   } else if (difficulty === "normal") {
-    return 1000;
+    return 1000; // 1000 milliseconds
   } else if (difficulty === "hard") {
-    return randomInteger(600, 1200);
+    return randomInteger(600, 1200); // Random number between 600 and 1200 milliseconds
+  } else {
+    throw new Error("Invalid difficulty level");
   }
 }
+
 
 /**
  * Chooses a random hole from a list of holes.
  */
+let lastHole = -1; // Initialize lastHole with an invalid index
+
 function chooseHole(holes) {
-  let index = Math.floor(Math.random() * holes.length);
-  let hole = holes[index];
-  if (hole === lastHole) {
-    return chooseHole(holes); // Recursive call to ensure we get a different hole
+  const index = randomInteger(0, holes.length - 1);
+  const hole = holes[index];
+
+  // Check if the chosen hole is the same as the last one
+  if (index === lastHole) {
+    // If it's the same, recursively call chooseHole again
+    return chooseHole(holes);
   }
-  lastHole = hole;
+
+  // Update lastHole to the current index
+  lastHole = index;
   return hole;
 }
 
