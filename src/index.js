@@ -35,8 +35,6 @@ function setDelay(difficulty) {
 }
 
 
-
-
 function chooseHole(holes) {
   const index = randomInteger(0, holes.length - 1);
   const hole = holes[index];
