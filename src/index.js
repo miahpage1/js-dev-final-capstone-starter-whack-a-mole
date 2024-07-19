@@ -3,6 +3,14 @@ const moles = document.querySelectorAll('.mole');
 const startButton = document.querySelector('#start');
 const score = document.querySelector('#score'); // Query selector for the score element
 const timerDisplay = document.querySelector('#timer'); // Query selector for the timer element
+const difficultySelector = document.querySelector('#difficulty');
+
+difficultySelector.addEventListener('change', function() {
+  difficulty = this.value;
+  clearInterval(gameInterval); 
+  startGame(); 
+});
+
 
 let time = 0;
 let timer;
