@@ -135,7 +135,6 @@ function updateTimer() {
 }
 
 
-let timer;
 function startTimer() {
   timer = setInterval(updateTimer, 1000);  
  return timer;
