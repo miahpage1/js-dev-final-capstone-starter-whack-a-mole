@@ -117,18 +117,23 @@ function clearScore() {
 }
 
 
+let time = 60; 
+
 function updateTimer() {
-  if (time > 0) {
-    timerDisplay.textContent = time;
+  if (time >= 0) {
+    timerDisplay.textContent = time; 
     time--;
-  }
-  return time;
+  } else {
+    clearInterval(timer); 
+ }
 }
 
 
+let time = 60;
+let timer;
 function startTimer() {
-  timer = setInterval(updateTimer, 1000);
-  return timer;
+  timer = setInterval(updateTimer, 1000);  
+ return timer;
 }
 
 
