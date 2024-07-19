@@ -41,13 +41,13 @@ function chooseHole(holes) {
   const index = randomInteger(0, holes.length - 1);
   const hole = holes[index];
 
-  // Check if the chosen hole is the same as the last one
+
   if (index === lastHole) {
     // If it's the same, recursively call chooseHole again
     return chooseHole(holes);
   }
 
-  // Update lastHole to the current index
+ 
   lastHole = index;
   return hole;
 }
