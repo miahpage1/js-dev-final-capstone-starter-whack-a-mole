@@ -123,7 +123,7 @@ function clearScore() {
 }
 
 
-let time = 60; 
+ time = 60; 
 
 function updateTimer() {
   if (time >= 0) {
@@ -135,7 +135,6 @@ function updateTimer() {
 }
 
 
-let time = 60;
 let timer;
 function startTimer() {
   timer = setInterval(updateTimer, 1000);  
