@@ -16,9 +16,9 @@ function randomInteger(min, max) {
 
 function setDelay(difficulty) {
   if (difficulty === "easy") {
-    return 1500; // 1500 milliseconds
+    return 1500; 
   } else if (difficulty === "normal") {
-    return 1000; // 1000 milliseconds
+    return 1000; 
   } else if (difficulty === "hard") {
     return randomInteger(600, 1200); // Random number between 600 and 1200 milliseconds
   } else {
