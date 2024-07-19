@@ -107,7 +107,7 @@ function updateScore() {
   points++;
   score.textContent = points;
   return points;
-}
+
 
 
 function clearScore() {
@@ -139,7 +139,7 @@ function startTimer() {
 
 function whack(event) {
   updateScore();
-  toggleVisibility(event.target); 
+  return points;
 }
 
 
